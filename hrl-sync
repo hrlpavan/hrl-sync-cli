@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# HRL One-Command Universal Rollout
+python3 /Users/pavankumars/.gemini/antigravity/scratch/hrl-sync-cli/hrl_sync/cli.py "$@"
