@@ -42,6 +42,12 @@ PROJECTS = {
         "url": "https://hrlpavan.github.io/omnitransform-ai-resources/?v=header_ux_fixed",
         "branches": ["main"],
         "validate": None
+    },
+    "hrl-x-noise-cancellation": {
+        "path": SCRATCH_DIR / "hrl-x-noise-cancellation",
+        "url": "https://hrlpavan.github.io/hrl-x-noise-cancellation/",
+        "branches": ["main"],
+        "validate": ["python3", "-m", "unittest", "discover", "-s", "tests", "-p", "test_*.py"]
     }
 }
 
