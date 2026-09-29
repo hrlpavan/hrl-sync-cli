@@ -116,14 +116,26 @@ def rollout(message="feat: synchronized ecosystem rollout"):
         print(f"• {name.ljust(28)} : {url}")
     print("=" * 60 + "\n")
 
+    # Automatically trigger daily-project-updates quick-update
+    quick_update_bin = SCRATCH_DIR / "daily-project-updates" / "quick-update"
+    if quick_update_bin.exists():
+        print("[+] Triggering Daily Project Updates Auto-Sync...")
+        subprocess.run([str(quick_update_bin)])
+
 def main():
     parser = argparse.ArgumentParser(description="HRL Universal Project Sync & Rollout Tool")
-    parser.add_argument("command", choices=["rollout", "status", "test"], default="rollout", nargs="?", help="Command to run")
+    parser.add_argument("command", choices=["rollout", "status", "test", "daily"], default="rollout", nargs="?", help="Command to run")
     parser.add_argument("-m", "--message", default="feat: universal ecosystem feature synchronization", help="Commit message")
     args = parser.parse_args()
 
     if args.command == "rollout":
         rollout(message=args.message)
+    elif args.command == "daily":
+        quick_update_bin = SCRATCH_DIR / "daily-project-updates" / "quick-update"
+        if quick_update_bin.exists():
+            subprocess.run([str(quick_update_bin)])
+        else:
+            print("daily-project-updates quick-update script not found.")
     elif args.command == "status":
         print("Checking ecosystem status...")
         for name, config in PROJECTS.items():
@@ -141,3 +153,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
